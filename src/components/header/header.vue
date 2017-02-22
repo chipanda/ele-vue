@@ -31,22 +31,24 @@
       <img :src="seller.avatar" width="100%" height="100%">
     </div>
     <transition name="fade">
-      <div v-show="promptShow"  class="prompt" id="test-scroll">
-        <div class="content" >
-          <h1 class="name">{{seller.name}}</h1>
-          <div class="star-wrapper">
-            <star :score="seller.score" :size="48"></star>
-          </div>
-          <section-middle title="优惠信息"></section-middle>
-          <ul class="support">
-            <li v-for="support in seller.supports" class="support-item">
-              <support-icon class="icon" :supportType="support.type" type="2"></support-icon>
-              <span class="text">{{support.description}}</span>
-            </li>
-          </ul>
-          <section-middle title="商家信息"></section-middle>
-          <div class="bulletin">
-            {{seller.bulletin}}
+      <div v-show="promptShow" class="prompt" id="test-scroll">
+        <div class="detail-wrapper">
+          <div class="detail">
+            <h1 class="name">{{seller.name}}</h1>
+            <div class="star-wrapper">
+              <star :score="seller.score" :size="48"></star>
+            </div>
+            <section-middle title="优惠信息"></section-middle>
+            <ul class="support">
+              <li v-for="support in seller.supports" class="support-item">
+                <support-icon class="icon" :supportType="support.type" type="2"></support-icon>
+                <span class="text">{{support.description}}</span>
+              </li>
+            </ul>
+            <section-middle title="商家信息"></section-middle>
+            <div class="bulletin">
+              {{seller.bulletin}}
+            </div>
           </div>
         </div>
         <div class="footer" @click="hidePrompt">
@@ -180,56 +182,58 @@
       width: 100%
       height: 100%
     .prompt
-      display: flex
-      flex-direction: column
       position: fixed
-      z-index: 1000
       top: 0
       left: 0
       width: 100%
       height: 100%
+      z-index: 1000
       background-color: rgba(7, 17, 27, 0.8)
       overflow: auto
-      //backdrop-filter: blur(10px) //iphone生效
       &.fade-enter, &.fade-leave-active
         opacity: 0
       &.fade-enter-active, &.fade-leave-active
         transition: all 0.5s
-      .content
-        flex: 1 1 auto
+      .detail-wrapper
         width: auto
-        padding-top: 60px
-        padding-left: 36px
-        padding-right: 36px
-        .name
-          margin-bottom: 16px
-          text-align: center
-          font-size: 16px
-          font-weight: 700
-          line-height: 16px
-        .star-wrapper
-          text-align: center
-        .support
-          .support-item
-            font-size: 0
-            margin-bottom: 12px
-            .icon
-              display: inline-block
-              vertical-align: top
-              margin: 0 4px 0 2px
-            .text
-              height: 16px
-              line-height: 16px
-              font-size: 12px
-        .bulletin
-          padding: 0 12px
-          line-height: 24px
-          font-size: 12px
+        min-height: 100%
+        .detail
+          padding-bottom: 96px
+          padding-top: 60px
+          padding-left: 36px
+          padding-right: 36px
+          .name
+            margin-bottom: 16px
+            text-align: center
+            font-size: 16px
+            font-weight: 700
+            line-height: 16px
+          .star-wrapper
+            text-align: center
+          .support
+            .support-item
+              font-size: 0
+              margin-bottom: 12px
+              .icon
+                display: inline-block
+                vertical-align: top
+                margin: 0 4px 0 2px
+              .text
+                height: 16px
+                line-height: 16px
+                font-size: 12px
+          .bulletin
+            padding: 0 12px
+            line-height: 24px
+            font-size: 12px
       .footer
-        flex: none
-        height: 64px
+        position: relative
         width: 100%
+        height: 96x
+        margin-top: -96px
+        padding-top: 32px
         text-align: center
+        box-sizing: border-box
         .icon-close
           font-size: 32px
           color: rgba(255, 255, 255, 0.5)
