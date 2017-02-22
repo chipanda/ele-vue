@@ -229,7 +229,7 @@
       .footer
         position: relative
         width: 100%
-        height: 96x
+        height: 96px
         margin-top: -96px
         padding-top: 32px
         text-align: center
