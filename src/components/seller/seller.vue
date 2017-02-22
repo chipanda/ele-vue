@@ -83,8 +83,21 @@
         })()
       }
     },
-    updated(){
+    mounted(){
       if (this.seller) {
+        this._initScroll();
+      }
+    },
+    updated(){
+      this._initScroll();
+    },
+    computed: {
+      favoriteText(){
+        return this.favorite ? '已收藏' : '收藏'
+      }
+    },
+    methods: {
+      _initScroll(){
         if (this.seller.pics) {
           let el = document.getElementById('pic-scroll').firstChild;
           let marginright = 6;
@@ -94,29 +107,19 @@
           el.style.width = width + 'px';
         }
         this.$nextTick(() => {
-          this._initScroll();
+          if (!this.sellerScroll) {
+            this.sellerScroll = new BScroll(document.getElementById('seller-scroll'), {
+              click: true
+            });
+            this.picScroll = new BScroll(document.getElementById('pic-scroll'), {
+              scrollX: true,
+              eventPassthrough: 'vertical'
+            });
+          } else {
+            this.sellerScroll.refresh();
+            this.picScroll.refresh();
+          }
         })
-      }
-    },
-    computed: {
-      favoriteText(){
-        return this.favorite ? '已收藏' : '收藏'
-      }
-    },
-    methods: {
-      _initScroll(){
-        if (!this.sellerScroll) {
-          this.sellerScroll = new BScroll(document.getElementById('seller-scroll'), {
-            click: true
-          });
-          this.picScroll = new BScroll(document.getElementById('pic-scroll'), {
-            scrollX: true,
-            eventPassthrough: 'vertical'
-          });
-        } else {
-          this.sellerScroll.refresh();
-          this.picScroll.refresh();
-        }
       },
       toggleFavorite(event){
         if (!event._constructed) {
