@@ -106,7 +106,6 @@
     methods: {
       _initScroll(){
         if (!this.sellerScroll) {
-          //console.log(document.getElementById('pic-scroll').firstChild.clientWidth)
           this.sellerScroll = new BScroll(document.getElementById('seller-scroll'), {
             click: true
           });
